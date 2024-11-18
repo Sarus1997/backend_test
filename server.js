@@ -87,9 +87,10 @@ app.delete('/model/delete/:id', (req, res) => {
     }
 });
 
-
+//** รัน server ด้วยคำสั่ง node server.js หรือ nodemon server.js หรือ npm start หรือ npm run dev */
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
+    console.log(`Click here to open: http://localhost:${port}`);
 });
 
 module.exports = app;
