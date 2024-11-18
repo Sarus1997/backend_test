@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Client</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-bottom: 20px;
+        }
+
+        #users,
+        #user,
+        #newUser,
+        #updatedUser,
+        #deletedUser {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>API Client</h1>
+
+        <h2>Get All Users</h2>
+        <button onclick="getUsers()">Get Users</button>
+        <div id="users"></div>
+
+        <h2>Get User by ID</h2>
+        <input type="number" id="userId" placeholder="Enter user ID">
+        <button onclick="getUser()">Get User</button>
+        <div id="user"></div>
+
+        <h2>Add User</h2>
+        <form onsubmit="addUser(); return false;">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" id="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" id="phone" class="form-control" placeholder="Enter phone">
+            </div>
+            <div class="mb-3">
+                <label for="website" class="form-label">Website</label>
+                <input type="text" id="website" class="form-control" placeholder="Enter website">
+            </div>
+            <div class="mb-3">
+                <label for="street" class="form-label">Street</label>
+                <input type="text" id="street" class="form-control" placeholder="Enter street">
+            </div>
+            <div class="mb-3">
+                <label for="suite" class="form-label">Suite</label>
+                <input type="text" id="suite" class="form-control" placeholder="Enter suite">
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" id="city" class="form-control" placeholder="Enter city">
+            </div>
+            <div class="mb-3">
+                <label for="zipcode" class="form-label">Zipcode</label>
+                <input type="text" id="zipcode" class="form-control" placeholder="Enter zipcode">
+            </div>
+            <div class="mb-3">
+                <label for="lat" class="form-label">Latitude</label>
+                <input type="text" id="lat" class="form-control" placeholder="Enter lat">
+            </div>
+            <div class="mb-3">
+                <label for="lng" class="form-label">Longitude</label>
+                <input type="text" id="lng" class="form-control" placeholder="Enter lng">
+            </div>
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+        <div id="newUser"></div>
+
+        <h2>Update User</h2>
+        <form onsubmit="updateUser(); return false;">
+            <div class="mb-3">
+                <label for="updateUserId" class="form-label">User ID</label>
+                <input type="number" id="updateUserId" class="form-control" placeholder="Enter user ID">
+            </div>
+            <div class="mb-3">
+                <label for="updateName" class="form-label">Name</label>
+                <input type="text" id="updateName" class="form-control" placeholder="Enter name">
+            </div>
+            <div class="mb-3">
+                <label for="updateEmail" class="form-label">Email</label>
+                <input type="text" id="updateEmail" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+                <label for="updatePhone" class="form-label">Phone</label>
+                <input type="text" id="updatePhone" class="form-control" placeholder="Enter phone">
+            </div>
+            <div class="mb-3">
+                <label for="updateWebsite" class="form-label">Website</label>
+                <input type="text" id="updateWebsite" class="form-control" placeholder="Enter website">
+            </div>
+            <div class="mb-3">
+                <label for="updateStreet" class="form-label">Street</label>
+                <input type="text" id="updateStreet" class="form-control" placeholder="Enter street">
+            </div>
+            <div class="mb-3">
+                <label for="updateSuite" class="form-label">Suite</label>
+                <input type="text" id="updateSuite" class="form-control" placeholder="Enter suite">
+            </div>
+            <div class="mb-3">
+                <label for="updateCity" class="form-label">City</label>
+                <input type="text" id="updateCity" class="form-control" placeholder="Enter city">
+            </div>
+            <div class="mb-3">
+                <label for="updateZipcode" class="form-label">Zipcode</label>
+                <input type="text" id="updateZipcode" class="form-control" placeholder="Enter zipcode">
+            </div>
+            <div class="mb-3">
+                <label for="updateLat" class="form-label">Latitude</label>
+                <input type="text" id="updateLat" class="form-control" placeholder="Enter lat">
+            </div>
+            <div class="mb-3">
+                <label for="updateLng" class="form-label">Longitude</label>
+                <input type="text" id="updateLng" class="form-control" placeholder="Enter lng">
+            </div>
+            <button type="submit" class="btn btn-primary">Update User</button>
+        </form>
+        <div id="updatedUser"></div>
+
+        <h2>Delete User</h2>
+        <form onsubmit="deleteUser(); return false;">
+            <div class="mb-3">
+                <label for="deleteUserId" class="form-label">User ID</label>
+                <input type="number" id="deleteUserId" class="form-control" placeholder="Enter user ID">
+            </div>
+            <button type="submit" class="btn btn-primary">Delete User</button>
+        </form>
+        <div id="deletedUser"></div>
+    </div>
+
+
+</body>
+
+<script>
+    const baseUrl = 'http://localhost:3000';
+
+    async function getUsers() {
+        try {
+            const response = await fetch(`${baseUrl}/model`);
+            const users = await response.json();
+            document.getElementById('users').innerHTML = JSON.stringify(users, null, 2);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        }
+    }
+
+    async function getUser() {
+        const id = document.getElementById('userId').value;
+        try {
+            const response = await fetch(`${baseUrl}/model/${id}`);
+            const user = await response.json();
+            document.getElementById('user').innerHTML = JSON.stringify(user, null, 2);
+        } catch (error) {
+            console.error('Error fetching user:', error);
+        }
+    }
+
+    async function addUser() {
+        const userData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            website: document.getElementById('website').value,
+            address: {
+                street: document.getElementById('street').value,
+                suite: document.getElementById('suite').value,
+                city: document.getElementById('city').value,
+                zipcode: document.getElementById('zipcode').value,
+                geo: {
+                    lat: document.getElementById('lat').value,
+                    lng: document.getElementById('lng').value
+                }
+            }
+        };
+
+        try {
+            const response = await fetch(`${baseUrl}/model/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+            const newUser = await response.json();
+            document.getElementById('newUser').innerHTML = JSON.stringify(newUser, null, 2);
+        } catch (error) {
+            console.error('Error adding user:', error);
+        }
+    }
+
+    async function updateUser() {
+        const id = document.getElementById('updateUserId').value;
+        const userData = {
+            name: document.getElementById('updateName').value,
+            email: document.getElementById('updateEmail').value,
+            phone: document.getElementById('updatePhone').value,
+            website: document.getElementById('updateWebsite').value,
+            address: {
+                street: document.getElementById('updateStreet').value,
+                suite: document.getElementById('updateSuite').value,
+                city: document.getElementById('updateCity').value,
+                zipcode: document.getElementById('updateZipcode').value,
+                geo: {
+                    lat: document.getElementById('updateLat').value,
+                    lng: document.getElementById('updateLng').value
+                }
+            }
+        };
+
+        try {
+            const response = await fetch(`${baseUrl}/model/update/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+            const updatedUser = await response.json();
+            document.getElementById('updatedUser').innerHTML = JSON.stringify(updatedUser, null, 2);
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
+    }
+
+    async function deleteUser() {
+        const id = document.getElementById('deleteUserId').value;
+        try {
+            const response = await fetch(`${baseUrl}/model/delete/${id}`, {
+                method: 'DELETE',
+            });
+            const deletedUser = await response.json();
+            document.getElementById('deletedUser').innerHTML = JSON.stringify(deletedUser, null, 2);
+        } catch (error) {
+            console.error('Error deleting user:', error);
+        }
+    }
+</script>
+
+</html>
