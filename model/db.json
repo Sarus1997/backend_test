@@ -168,5 +168,39 @@
         "lng": "57.2232"
       }
     }
+  },
+  {
+    "id": 11,
+    "name": "Saharat Suwannapapond",
+    "email": "Saharat.SS@example.com",
+    "phone": "1010-1010-1010",
+    "website": "https://saharat.com",
+    "address": {
+      "street": "123 Stun",
+      "suite": "Apt 1",
+      "city": "Thailane",
+      "zipcode": "91130",
+      "geo": {
+        "lat": "100.100",
+        "lng": "-188.2558"
+      }
+    }
+  },
+  {
+    "id": 12,
+    "name": "Prayut Jan-o-cha",
+    "email": "prayut.pj@gmail.com",
+    "phone": "123-123-4455",
+    "website": "prayut.com",
+    "address": {
+      "street": "bangkok",
+      "suite": "786 ",
+      "city": "thailand",
+      "zipcode": "83110",
+      "geo": {
+        "lat": "88.665",
+        "lng": "-182.222"
+      }
+    }
   }
 ]

@@ -26,6 +26,8 @@ app.get('/model/:id', (req, res) => {
     }
 });
 
+const fs = require('fs'); // เพิ่มส่วนนี้
+
 app.post('/model/add', (req, res) => {
     const newUser = {
         id: database.length + 1,
@@ -46,8 +48,18 @@ app.post('/model/add', (req, res) => {
     };
 
     database.push(newUser);
-    res.status(201).json(newUser);
+
+    // เขียนข้อมูลใหม่ลงในไฟล์ db.json
+    fs.writeFile('./model/db.json', JSON.stringify(database, null, 2), (err) => {
+        if (err) {
+            console.error('Error writing to db.json:', err);
+            res.status(500).json({ message: 'Failed to save data' });
+        } else {
+            res.status(201).json(newUser);
+        }
+    });
 });
+
 
 app.put('/model/update/:id', (req, res) => {
     const id = Number(req.params.id);
